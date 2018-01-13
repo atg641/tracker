@@ -23,7 +23,6 @@ public class TrackPoint {
 		double lon1 = Math.toRadians(anotherTrackPoint.longitude);
 		double lat2 = Math.toRadians(latitude);
 		double lon2 = Math.toRadians(longitude);
-
 		// great circle distance in radians, using law of cosines formula
 		double angle = Math
 				.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));

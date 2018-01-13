@@ -5,6 +5,12 @@ class BicycleDemo {
         // Bicycle objects
         Bicycle bike1 = new Bicycle();
         Bicycle bike2 = new Bicycle();
+        
+        Bicycle [] bikes = new Bicycle[2];
+        
+        bikes[0] = new Bicycle();
+        
+     
 
         // Invoke methods on 
         // those objects

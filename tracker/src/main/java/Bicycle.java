@@ -2,8 +2,8 @@
 class Bicycle {
 	//fields
     int cadence = 0;
-    int speed = 0;
-    int gear = 1;  //inches
+    int gear = 1;
+    double inchestomile = 0.00095;
     
     //constructor
     Bicycle(int cad, int g){
@@ -17,25 +17,16 @@ class Bicycle {
          cadence = newValue;       	 
     }
     
-    int mySpeed() {
-    		return gear * cadence; //speed in inches per minute
+    double mySpeed() {
+    		return (gear * cadence) * inchestomile; //speed in inches per minute
     }
 
     void changeGear(int newValue) {
          gear = newValue;
     }
 
-    void speedUp(int increment) {
-         speed += increment;   
-    }
-
-    void applyBrakes(int decrement) {
-         speed = speed - decrement;
-    }
-
     void printStates() {
          System.out.println("cadence:" +
-             cadence + " speed:" + 
-             speed + " gear:" + gear);
+             cadence  + " gear:" + gear);
     }
 }

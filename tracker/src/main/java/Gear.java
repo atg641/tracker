@@ -1,10 +1,12 @@
-class Gears {
-	int ChainRingTeeth;
-	int SprocketTeeth;
-	double WheelDiameter;
-	
-	int computeGearInches() {
-		
-		
+class Gear {
+	int chainRingTeeth;
+	int sprocketTeeth;
+	final static double wheelDiameter =  27 ;
+	public Gear(int chr, int cog) {
+		chainRingTeeth  = chr;
+		sprocketTeeth = cog;
+	}
+	double  computeGearInches() {	
+		return  (wheelDiameter * chainRingTeeth  * sprocketTeeth);
 	}
 }

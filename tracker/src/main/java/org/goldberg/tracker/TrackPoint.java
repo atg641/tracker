@@ -8,6 +8,7 @@ public class TrackPoint {
 	public double longitude;
 	public double elevation; // units?
 	public Instant time;
+	final static double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
 	public TrackPoint(String lat, String lon, String ele, String t) {
 		latitude = Double.parseDouble(lat);
@@ -18,7 +19,7 @@ public class TrackPoint {
 
 	public double distanceTo(TrackPoint anotherTrackPoint) {
 
-		double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
+		
 		double lat1 = Math.toRadians(anotherTrackPoint.latitude);
 		double lon1 = Math.toRadians(anotherTrackPoint.longitude);
 		double lat2 = Math.toRadians(latitude);

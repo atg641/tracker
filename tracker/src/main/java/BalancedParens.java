@@ -53,6 +53,7 @@ public class BalancedParens {
 		return count;
 
 	}
+	
 	// Create a method which takes one string and returns true (same signature as is
 	// balanced) if the string is the same forward and backwards
 	// Take string and loop from r to l and then reverse it for i= length of string
@@ -72,6 +73,25 @@ public class BalancedParens {
 		return reverseString;
 
 	}
+	
+	static int max(int[] anArray) {
+		for(int elem : anArray) {
+			
+		}
+		//an equivalent loop
+		for(int i=0; i < anArray.length; i++) {
+			int elem = anArray[i];
+			
+		}
+		//max returns the largest number in the array e.g. max(mayArray) = 93
+		return 0;
+	}
+	
+	static float average(int[] anArray) {
+		return 0;
+	}
+	
+	static int[] myArray = { 2, 45, 87, 93 ,46};
 
 	static String test1 = "abcbad";
 

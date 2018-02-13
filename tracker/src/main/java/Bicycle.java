@@ -55,7 +55,7 @@ class Bicycle {
     		bike2.changeGear(53, 15);
     		bike1.mySpeed();
     		bike2.mySpeed();
-    		bike1.toString();
+    		bike1.toString(); //Not sure how to use the string
     		bike2.toString();
     		bike1.printStates();
     		bike2.printStates();

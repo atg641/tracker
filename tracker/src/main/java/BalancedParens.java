@@ -82,16 +82,21 @@ public class BalancedParens {
 		// search string = "ab"  and targetString = "abbabab"  return 3
 		//hint use the indexOf method of the String class
 		// learn about the "while" loop
-		int j = targetString.indexOf(str, fromIndex)
+		//BalancedParens.int j = targetString.indexOf(str, fromIndex)
 		return 0;
 	}
+	
+	static int[] myArray = { 2, 45, 87, 93, 46 };
 
 	static int max(int[] anArray) {
-		for(int elem : anArray) {
-			
+		int currentMax = anArray[0];
+		for(int elem1 : anArray) {
+			if (elem1 > currentMax)  {
+		          currentMax =elem1;	
+			}
 		}
 		//an equivalent loop
-		int currentMax = anArray[0];
+		
 		for(int i=0; i < anArray.length; i++) {
 			int elem = anArray[i];
 			if (elem > currentMax)  {
@@ -100,7 +105,7 @@ public class BalancedParens {
 		//max returns the largest number in the array e.g. max(mayArray) = 93
 	}
 		return currentMax;
-	
+
 	
 	}
 	
@@ -115,7 +120,7 @@ public class BalancedParens {
 		return average;
 	}
 
-	static int[] myArray = { 2, 45, 87, 93, 46 };
+
 
 	static String test1 = "abcbad";
 

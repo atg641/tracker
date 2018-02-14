@@ -19,7 +19,6 @@ public class TrackPoint {
 
 	public double distanceTo(TrackPoint anotherTrackPoint) {
 
-		
 		double lat1 = Math.toRadians(anotherTrackPoint.latitude);
 		double lon1 = Math.toRadians(anotherTrackPoint.longitude);
 		double lat2 = Math.toRadians(latitude);

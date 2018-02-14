@@ -58,8 +58,8 @@ public class TrackCreator {
 		return gpsTrack;
 	}
 
-	public static void main(String argv[]) {
-		GPSTrack myTrack = createTrackFromXML("data/Track102.xml");
+	public static void main(String [] arg) {
+		GPSTrack myTrack = createTrackFromXML("data/Track102.xmlFFF");
 		System.out.println("Track has " + myTrack.points.length + " points " );
 	}
 }

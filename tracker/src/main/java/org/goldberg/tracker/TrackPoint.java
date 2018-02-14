@@ -34,5 +34,8 @@ public class TrackPoint {
 		return statuteMiles;
 
 	}
+	public long timeBetweenTrackPoints(TrackPoint anotherTrackPoint) {
+		return 0;
+	}
 
 }

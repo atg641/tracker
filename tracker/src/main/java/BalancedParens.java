@@ -77,6 +77,14 @@ public class BalancedParens {
 		return reverseString;
 
 	}
+	
+	static int numberOfOcurrences(String searchString, String targetString) {
+		// search string = "ab"  and targetString = "abbabab"  return 3
+		//hint use the indexOf method of the String class
+		// learn about the "while" loop
+		int j = targetString.indexOf(str, fromIndex)
+		return 0;
+	}
 
 	static int max(int[] anArray) {
 		for(int elem : anArray) {
@@ -97,14 +105,13 @@ public class BalancedParens {
 	}
 	
 	static float average(int[] anArray) {
-		int count = 0;
+		
 		float total = 0;
 		for(int i=0; i < anArray.length; i++) {
-			count++;
 			total += anArray[i];
 		}
 	
-		float average = total / count;
+		float average = total / anArray.length;
 		return average;
 	}
 

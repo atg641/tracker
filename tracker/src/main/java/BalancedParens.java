@@ -5,6 +5,10 @@ public class BalancedParens {
 		System.out.println(isBalanced(foo));
 		System.out.println(reverse(test1));
 		System.out.println(numberOf('a', test1));
+		System.out.println(max(myArray));
+		System.out.println(average(myArray));
+
+
 	}
 
 	static boolean isBalanced(String myString) {
@@ -53,7 +57,7 @@ public class BalancedParens {
 		return count;
 
 	}
-	
+
 	// Create a method which takes one string and returns true (same signature as is
 	// balanced) if the string is the same forward and backwards
 	// Take string and loop from r to l and then reverse it for i= length of string
@@ -73,25 +77,38 @@ public class BalancedParens {
 		return reverseString;
 
 	}
-	
+
 	static int max(int[] anArray) {
 		for(int elem : anArray) {
 			
 		}
 		//an equivalent loop
+		int currentMax = anArray[0];
 		for(int i=0; i < anArray.length; i++) {
 			int elem = anArray[i];
-			
+			if (elem > currentMax)  {
+	          currentMax =elem;
 		}
 		//max returns the largest number in the array e.g. max(mayArray) = 93
-		return 0;
+	}
+		return currentMax;
+	
+	
 	}
 	
 	static float average(int[] anArray) {
-		return 0;
-	}
+		int count = 0;
+		float total = 0;
+		for(int i=0; i < anArray.length; i++) {
+			count++;
+			total += anArray[i];
+		}
 	
-	static int[] myArray = { 2, 45, 87, 93 ,46};
+		float average = total / count;
+		return average;
+	}
+
+	static int[] myArray = { 2, 45, 87, 93, 46 };
 
 	static String test1 = "abcbad";
 

@@ -79,6 +79,24 @@ public class BalancedParens {
 	}
 	
 	static int numberOfOcurrences(String searchString, String targetString) {
+		char character;
+		searchString.indexOf(targetString);
+		while(searchString )
+		for(int i=0; i < searchString.length(); i++) {
+			char ch1 = searchString.charAt(i);
+			char ch2 = targetString.charAt(i);
+		
+			if(ch1 == ch2) {
+				ch1 += 
+			}
+			
+				{
+				
+			}
+		}
+		
+        
+			
 		// search string = "ab"  and targetString = "abbabab"  return 3
 		//hint use the indexOf method of the String class
 		// learn about the "while" loop

@@ -2,11 +2,17 @@
 public class BalancedParens {
 
 	public static void main(String[] args) {
-		System.out.println(isBalanced(foo));
-		System.out.println(reverse(test1));
-		System.out.println(numberOf('a', test1));
-		System.out.println(max(myArray));
-		System.out.println(average(myArray));
+		// System.out.println(isBalanced(foo));
+		// System.out.println(reverse(test1));
+		// System.out.println(numberOf('a', test1));
+		// System.out.println(max(myArray));
+		// System.out.println(average(myArray));
+		// System.out.println(numberOfOcurrences(smallString, bigString));
+		// System.out.println(numberOfOcurrences2(smallString, bigString));
+		System.out.println(isTheSame(smallString, bigString));
+		System.out.println(isTheSame(bigString, smallString));
+		System.out.println(countChar(consecutive, '*'));
+		System.out.println(countChar(consecutive2, '*'));
 
 
 	}
@@ -77,71 +83,119 @@ public class BalancedParens {
 		return reverseString;
 
 	}
-	
+
 	static int numberOfOcurrences(String searchString, String targetString) {
-		char character;
-		searchString.indexOf(targetString);
-		while(searchString )
-		for(int i=0; i < searchString.length(); i++) {
-			char ch1 = searchString.charAt(i);
-			char ch2 = targetString.charAt(i);
-		
-			if(ch1 == ch2) {
-				ch1 += 
-			}
-			
-				{
-				
+		int placment = 0;
+		int count = 0;
+
+		while (placment != -1) {
+			placment = targetString.indexOf(searchString, placment);
+			if (placment != -1) {
+				count++;
+				placment += searchString.length();
 			}
 		}
-		
-        
-			
-		// search string = "ab"  and targetString = "abbabab"  return 3
-		//hint use the indexOf method of the String class
-		// learn about the "while" loop
-		//BalancedParens.int j = targetString.indexOf(str, fromIndex)
-		return 0;
+		System.out.println(count);
+
+		return count;
 	}
-	
+
+	// Outside loop will be the matching aspect of the loop
+	// break statment
+
+	// search string = "ab" and targetString = "abbabab" return 3
+	// hint use the indexOf method of the String class
+	// learn about the "while" loop
+	// BalancedParens.int j = targetString.indexOf(str, fromIndex)
+
+	static boolean isTheSame(String s1, String s2) {
+		boolean match = true;
+		if (s1.length() == s2.length()) {
+			for (int i = 0; i < s1.length(); i++) {
+				char ch1 = s1.charAt(i);
+				char ch2 = s2.charAt(i);
+				if (ch1 != ch2) {
+					match = false;
+					break;
+				}
+			}
+			return match;
+		}
+		else {
+			return false;
+		}
+	}
+
+	static int numberOfOcurrences2(String searchString, String targetString) {
+		int count = 0;
+		String compare = null;
+		for (int i = 0; i < targetString.length()-searchString.length(); i++) {
+			compare = targetString.substring(i, i+searchString.length());
+			if(isTheSame(compare, searchString)) {
+				count++;
+			}
+			
+		}
+		return count;
+	}
+
 	static int[] myArray = { 2, 45, 87, 93, 46 };
 
 	static int max(int[] anArray) {
 		int currentMax = anArray[0];
-		for(int elem1 : anArray) {
-			if (elem1 > currentMax)  {
-		          currentMax =elem1;	
+		for (int elem1 : anArray) {
+			if (elem1 > currentMax) {
+				currentMax = elem1;
 			}
 		}
-		//an equivalent loop
-		
-		for(int i=0; i < anArray.length; i++) {
+		// an equivalent loop
+
+		for (int i = 0; i < anArray.length; i++) {
 			int elem = anArray[i];
-			if (elem > currentMax)  {
-	          currentMax =elem;
+			if (elem > currentMax) {
+				currentMax = elem;
+			}
+			// max returns the largest number in the array e.g. max(mayArray) = 93
 		}
-		//max returns the largest number in the array e.g. max(mayArray) = 93
-	}
 		return currentMax;
 
-	
 	}
-	
+
 	static float average(int[] anArray) {
-		
+
 		float total = 0;
-		for(int i=0; i < anArray.length; i++) {
+		for (int i = 0; i < anArray.length; i++) {
 			total += anArray[i];
 		}
-	
+
 		float average = total / anArray.length;
 		return average;
 	}
-
-
+	
+	public static int countChar(String search, char c) {
+		    int count = 0;
+		    boolean found = false;
+		    for( int i = 0; i < search.length(); i++)
+		    {
+		      if( search.charAt(i) == c )
+		      {
+		        count++;
+		        found = true;
+		      }
+		      else {
+		        if(found) break;
+		      }
+		    }
+		    return count;
+	 }
 
 	static String test1 = "abcbad";
 
 	static String foo = "(()())";
+
+	static String bigString = "abababab";
+	static String smallString = "ab";
+	static String consecutive = "a**b*";
+	static String consecutive2 = "***m";
 
 }

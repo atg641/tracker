@@ -11,6 +11,19 @@ public class GarminTrackPoint extends TrackPoint {
 	int heartRate;
 
 
+	void foo(){
+		latitude = 5;
+	}
+	
+
+	double currentSpeed() {
+		return speed;
+	}
+
+	public double distanceTo(TrackPoint anotherTrackPoint) {
+		return 0;
+	}
+	
 		
 	
 }

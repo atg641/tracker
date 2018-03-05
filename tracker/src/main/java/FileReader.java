@@ -15,7 +15,7 @@ public class FileReader {
 		ArrayList<String> arr = new ArrayList<String>();
 		Scanner scan = null;
 
-		File myFile = new File(args[0]);
+		File myFile = new File("data/Track102.xml");
 		scan = new Scanner(myFile);
 
 		while (scan.hasNextLine()) {
@@ -23,7 +23,8 @@ public class FileReader {
 
 		}
 		scan.close();
-		 for(String st : arr){
+		 
+		for(String st : arr){
 		 System.out.println(arr.subList(0, 10));
 		 System.out.println(arr.size());
 		 }

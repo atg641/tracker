@@ -9,11 +9,11 @@ public class BalancedParens {
 		// System.out.println(average(myArray));
 		// System.out.println(numberOfOcurrences(smallString, bigString));
 		// System.out.println(numberOfOcurrences2(smallString, bigString));
-		System.out.println(isTheSame(smallString, bigString));
-		System.out.println(isTheSame(bigString, smallString));
-		System.out.println(countChar(consecutive, '*'));
-		System.out.println(countChar(consecutive2, '*'));
-
+		// System.out.println(isTheSame(smallString, bigString));
+		// System.out.println(isTheSame(bigString, smallString));
+		// System.out.println(countChar(consecutive, '*'));
+		// System.out.println(countChar(consecutive2, '*'));
+		System.out.println(countCharConsecutive2(consecutive, '*'));
 
 	}
 
@@ -120,8 +120,7 @@ public class BalancedParens {
 				}
 			}
 			return match;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -129,17 +128,18 @@ public class BalancedParens {
 	static int numberOfOcurrences2(String searchString, String targetString) {
 		int count = 0;
 		String compare = null;
-		for (int i = 0; i < targetString.length()-searchString.length(); i++) {
-			compare = targetString.substring(i, i+searchString.length());
-			if(isTheSame(compare, searchString)) {
+		for (int i = 0; i < targetString.length() - searchString.length(); i++) {
+			compare = targetString.substring(i, i + searchString.length());
+			if (isTheSame(compare, searchString)) {
 				count++;
 			}
-			
+
 		}
 		return count;
 	}
 
 	static int[] myArray = { 2, 45, 87, 93, 46 };
+	static int[] myArray2 = new int [5];
 
 	static int max(int[] anArray) {
 		int currentMax = anArray[0];
@@ -171,23 +171,51 @@ public class BalancedParens {
 		float average = total / anArray.length;
 		return average;
 	}
-	
-	public static int countChar(String search, char c) {
-		    int count = 0;
-		    boolean found = false;
-		    for( int i = 0; i < search.length(); i++)
-		    {
-		      if( search.charAt(i) == c )
-		      {
-		        count++;
-		        found = true;
-		      }
-		      else {
-		        if(found) break;
-		      }
-		    }
-		    return count;
-	 }
+
+	public static int countCharConsecutive(String target) {
+		String search = "*";
+		int longestString = 0;
+		int position = target.indexOf(search);
+
+		while (position != -1) {
+			search = search + "*";
+			position = target.indexOf(search);
+			longestString++;
+		}
+
+		return longestString;
+	}
+
+	// public static int countChar(String search, char c) {
+	// int count = 0;
+	// boolean found = false;
+	// for (int i = 0; i < search.length(); i++) {
+	// if (search.charAt(i) == c) {
+	// count++;
+	// found = true;
+	// } else {
+	// if (found)
+	// break;
+	// }
+	// }
+	// return count;
+	// }
+
+	public static int countCharConsecutive2(String search, char c) {
+		int maxCount = 0;
+		for (int i = 0; i < search.length(); i++) {
+			if (search.charAt(i) == c) {
+				int count = 0;
+				while (i+count < search.length() && search.charAt(i + count) == c) {
+					count++;
+				}
+				if (count > maxCount) {
+					maxCount = count;
+				}
+			}
+		}
+		return maxCount;
+	}
 
 	static String test1 = "abcbad";
 

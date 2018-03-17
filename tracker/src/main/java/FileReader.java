@@ -23,19 +23,16 @@ public class FileReader {
 
 		}
 		scan.close();
-		 
-		for(String st : arr){
-		 System.out.println(arr.subList(0, 10));
-		 System.out.println(arr.size());
-		 }
-
+		
+		System.out.println(arr.subList(0, 10));
+		System.out.println(arr.size()); 
+		
 		int largestString = arr.get(0).length();
-		int index = 0;
-		for (int i = 0; i < arr.size(); i++) {
-			if (arr.get(i).length() > largestString) {
-				largestString = arr.get(i).length();
-				index = i;
-			}
+		for(String st : arr){
+			largestString = st.length();
+		 }
+System.out.println()
+		
 		}
 	}
 }

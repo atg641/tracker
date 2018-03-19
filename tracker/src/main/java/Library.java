@@ -43,6 +43,11 @@ class Library {
 
 		// Try to borrow The Lords of the Rings from both libraries
 		System.out.println("Borrowing The Lord of the Rings:");
+		firstLibrary.borrowBook("The Lord of the Rings", "Mitchell");
+		firstLibrary.borrowBook("The Da Vinci Code", "Mitchell");
+		firstLibrary.borrowBook("Le Petit Prince", "Mitchell");
+		firstLibrary.borrowBook("The Da Vinci Code", "Mitchell");
+		firstLibrary.borrowBook("A Tale of Two Cities", "Mitchell");
 		
 		System.out.println();
 
@@ -90,6 +95,14 @@ class Library {
 		}
 		return null;
 	}
+	private User findUserWithName(String name) {
+		for (User us : users) {
+			if (us.name.equals(name)) {
+				return us;
+			}
+		}
+		return null;
+	}
 
 	private boolean isUserValid(String name) {
 		for (User us : users) {
@@ -100,15 +113,23 @@ class Library {
 		return false;
 	}
 
+//	private boolean isCountMax(int ct, String name) {
+//		User us = findUserWithName(name);
+//		if(ct >= 3) {
+//			return true;
+//		}
+//		return false;
+//	}
+
 	private boolean borrowBook(String title, String name) {
-		
 		Book bk = findBookWithTitle(title);
-		
-		if(bk != null  && this.isUserValid(name)) {
+		User us = findUserWithName(name);
+		if (bk != null && this.isUserValid(name) && us.count <= 2) {
 			bk.borrowed();
+			us.count++;
 			return true;
 		}
-return false;
+		return false;
 	}
 
 	private void printAddress() {
@@ -135,3 +156,4 @@ return false;
 	}
 
 }
+

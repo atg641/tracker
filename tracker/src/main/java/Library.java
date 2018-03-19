@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 class Library {
 
+	private static final int MAX_NUMBER_OF_CHECKED_OUT_BOOKS = 3;
 	ArrayList<Book> books = new ArrayList<Book>();
 	ArrayList<User> users = new ArrayList<User>();
 
@@ -20,9 +21,20 @@ class Library {
 		Library secondLibrary = new Library("228 Liberty St.");
 
 		// Add four books to the first library
+		Book book1 = new Book("The Da Vinci Code");
+		Book book2 = new Book("The Da Vinci Code");
+		
+		if(book1 == book2) {
+			
+		}
+		
+		if(book1.equals (book2)) {
+			
+		}
+			
 
-		firstLibrary.addBook(new Book("The Da Vinci Code"));
-		firstLibrary.addBook(new Book("The Da Vinci Code"));
+		firstLibrary.addBook(book1);
+		firstLibrary.addBook(book2);
 		firstLibrary.addBook(new Book("Le Petit Prince"));
 		firstLibrary.addBook(new Book("A Tale of Two Cities"));
 		firstLibrary.addBook(new Book("The Lord of the Rings"));
@@ -124,7 +136,7 @@ class Library {
 	private boolean borrowBook(String title, String name) {
 		Book bk = findBookWithTitle(title);
 		User us = findUserWithName(name);
-		if (bk != null && this.isUserValid(name) && us.count <= 2) {
+		if (bk != null && this.isUserValid(name) && us.count < MAX_NUMBER_OF_CHECKED_OUT_BOOKS) {
 			bk.borrowed();
 			us.count++;
 			return true;

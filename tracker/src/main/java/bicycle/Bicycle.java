@@ -1,3 +1,4 @@
+package bicycle;
 
 class Bicycle {
 	//fields

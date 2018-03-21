@@ -1,8 +1,10 @@
 package org.goldberg.tracker;
 
+import java.util.List;
+
 public class GPSTrack {
 	
-	TrackPoint[] points;
+	List<TrackPoint> points;
 	public String trackName;
 	public String trackDecription;
 	

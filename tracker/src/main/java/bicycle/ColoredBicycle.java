@@ -1,3 +1,4 @@
+package bicycle;
 
 public class ColoredBicycle extends Bicycle {
 

@@ -1,22 +1,19 @@
+package concordance;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 
 public class Concordance {
 
 
 	public static void main(String[] args){
-		List<String> words;
+
 		Map<String,Integer> concord;
 
-		
 		String text = null;
          try {
 			text = new String(Files.readAllBytes(Paths.get(args[0])));
@@ -25,7 +22,6 @@ public class Concordance {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-         
  		String nonWord = "[^a-zA-Z]+";
  		String[] theWords = text.split(nonWord);
 // 		for(String s: theWords)
@@ -44,8 +40,10 @@ public class Concordance {
 			} else {
 				concord.put(wd, 1);
 			}
-			System.out.println(wd + ":"+  concord.get(wd));
+
 		}
+		
+		
 
 	}
 }

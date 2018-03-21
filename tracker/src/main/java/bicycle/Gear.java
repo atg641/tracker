@@ -1,3 +1,4 @@
+package bicycle;
 
 class Gear {
 	int chainRingTeeth = 53;

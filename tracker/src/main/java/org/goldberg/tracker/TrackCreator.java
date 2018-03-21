@@ -2,6 +2,7 @@ package org.goldberg.tracker;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -38,7 +39,7 @@ public class TrackCreator {
 		doc.getDocumentElement().normalize();
 		NodeList nList = doc.getElementsByTagName("trkpt");
 		GPSTrack gpsTrack  = new GPSTrack();
-		gpsTrack.points = new TrackPoint[nList.getLength()];
+		gpsTrack.points = new ArrayList<TrackPoint>();
 		for (int i = 0; i < nList.getLength(); i++) {
 			Node node = nList.item(i);
 			// A geographic point with optional elevation and time. Available for use by
@@ -49,7 +50,7 @@ public class TrackCreator {
 			String lonS = element.getAttribute("lon");
 			String elevationS = element.getElementsByTagName("ele").item(0).getTextContent();
 			String timeS = element.getElementsByTagName("time").item(0).getTextContent();
-			gpsTrack.points[i] = new TrackPoint(latS, lonS, elevationS, timeS);
+			gpsTrack.points.add(new TrackPoint(latS, lonS, elevationS, timeS));
 		}
 		String trackName  = doc.getElementsByTagName("name").item(0).getTextContent();
 		gpsTrack.trackName = trackName;
@@ -60,6 +61,6 @@ public class TrackCreator {
 
 	public static void main(String [] arg) {
 		GPSTrack myTrack = createTrackFromXML("data/Track102.xmlFFF");
-		System.out.println("Track has " + myTrack.points.length + " points " );
+		System.out.println("Track has " + myTrack.points.size() + " points " );
 	}
 }

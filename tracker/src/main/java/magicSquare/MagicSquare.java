@@ -44,7 +44,7 @@ public class MagicSquare {
 	public static void main(String[] args) throws FileNotFoundException {
 
 		MagicSquare magicSquare = new MagicSquare("data/magicSquare/luna.txt");
-		
+		boolean b = magicSquare.isValidMagicSquare();
 		
 		
 		

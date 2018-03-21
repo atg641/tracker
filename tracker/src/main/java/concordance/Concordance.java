@@ -28,14 +28,14 @@ public class Concordance {
 // 			System.out.println(s);
          
 
-         concord = new HashMap<String, Integer>();
+        concord = new HashMap<String, Integer>();
      
 		for (String wd : theWords) {
 				wd = wd.toLowerCase();
 				if(wd.length() == 0)
 					continue;
 			if (concord.containsKey(wd)) {
-				int prev = concord.get(wd);
+				int prev =  concord.get(wd);
 				concord.put(wd, prev+1);
 			} else {
 				concord.put(wd, 1);
@@ -43,6 +43,13 @@ public class Concordance {
 
 		}
 		
+		for(String wd : concord.keySet()) {
+			System.out.println(wd + " appears " + concord.get(wd));
+		}
+		//what is the most popular word?
+		//what is the average frequency of words appearing in the text?
+		//the above require using a for loop to examine all elements of the map
+		//how many distinct words appeared? (this is the size of the keySet)
 		
 
 	}

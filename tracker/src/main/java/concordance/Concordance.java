@@ -43,9 +43,21 @@ public class Concordance {
 
 		}
 		
+		int mostPopWord = 0;
+		String compWord = null;
 		for(String wd : concord.keySet()) {
 			System.out.println(wd + " appears " + concord.get(wd));
+			Integer wordCount = concord.get(wd);
+			if(wordCount > mostPopWord) {
+				mostPopWord = wordCount;
+				compWord = wd;
+				
+			}
 		}
+		System.out.println("Most popular word : " + compWord);
+		System.out.println("Number of distinct words : " + concord.size());
+		
+		
 		//what is the most popular word?
 		//what is the average frequency of words appearing in the text?
 		//the above require using a for loop to examine all elements of the map

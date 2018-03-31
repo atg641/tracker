@@ -50,9 +50,11 @@ public class Concordance {
 			Integer wordCount = concord.get(wd);
 			if(wordCount > mostPopWord) {
 				mostPopWord = wordCount;
-				compWord = wd;
+				compWord = wd;	
 				
 			}
+		
+			
 		}
 		System.out.println("Most popular word : " + compWord);
 		System.out.println("Number of distinct words : " + concord.size());

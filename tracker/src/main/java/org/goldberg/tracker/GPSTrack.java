@@ -14,8 +14,9 @@ public class GPSTrack {
 		Instant startTime = first.time;
 		Instant endTime = last.time;		
 		long differenceInSeconds = endTime.getEpochSecond()-startTime.getEpochSecond();
+		int  nanoStart = startTime.getNano();
+		//can we get this elapsed time accurate to milli-seconds? 
 		return differenceInSeconds;
-		
 	}
 	
 	

@@ -4,14 +4,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MagicSquare {
 	List<String> rowsAsText;
 	List<List<Integer>> matrix;
-
 	
 	public MagicSquare(String filename) {
 		rowsAsText = new ArrayList<String>();
@@ -24,24 +22,62 @@ public class MagicSquare {
 		}
 	}
 	
-
-		
-	int sum = 0;
-		ArrayList <Integer> listOfSums = new ArrayList<Integer>();
-		for(String row : rowsAsText) {
+	public boolean isValidMagicSquare() {
+		int sum = 0;
+		int magicSquareSum = -1;
+		for(int i=0 ; i < matrix.size() ; i++) {
 			sum = 0;
-			String[]  individualInt = row.split("\t");
-			for(String numS : individualInt) {
-				Integer num = Integer.decode(numS);
-				sum = sum + num;
+			for(int j=0 ; j < matrix.size() ; j++) {
+				sum = sum + matrix.get(i).get(j);
 			}
-			listOfSums.add(sum);
+		if (magicSquareSum == -1)
+			magicSquareSum = sum;
+		else
+			if (sum != magicSquareSum)
+				return false;
 		}
-		for(Integer sm : listOfSums) {
-			if(!sm.equals(sum)) {
-			return false;
+		for(int j=0 ; j < matrix.size() ; j++) {
+			sum = 0;
+			for(int i=0 ; i < matrix.size() ; i++) {
+				sum = sum + matrix.get(i).get(j);
 			}
+				if (sum != magicSquareSum)
+				return false;	
 		}
+		sum=0;
+		for(int j = 0; j < matrix.size() ; j++) {
+			sum = sum + matrix.get(j).get(j);
+		}
+		if (sum != magicSquareSum)
+			return false;	
+		
+		sum=0;
+		for(int j = 0; j < matrix.size() ; j++) {
+			int i = matrix.size()-1-j;
+			sum = sum + matrix.get(j).get(i);
+		}
+		if (sum != magicSquareSum)
+			return false;	
+		
+		
+	
+	
+	
+//		ArrayList <Integer> listOfSums = new ArrayList<Integer>();
+//		for(String row : rowsAsText) {
+//			sum = 0;
+//			String[]  individualInt = row.split("\t");
+//			for(String numS : individualInt) {
+//				Integer num = Integer.decode(numS);
+//				sum = sum + num;
+//			}
+//			listOfSums.add(sum);
+//		}
+//		for(Integer sm : listOfSums) {
+//			if(!sm.equals(sum)) {
+//			return false;
+//			}
+//		}
 		
 		
 		return true; //stub

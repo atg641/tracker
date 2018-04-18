@@ -11,12 +11,16 @@ public class GPSTrack {
 	public long getDuration() {
 		TrackPoint first = points.get(0);
 		TrackPoint last = points.get(points.size() - 1 );
-		Instant startTime = first.time;
-		Instant endTime = last.time;		
-		long differenceInSeconds = endTime.getEpochSecond()-startTime.getEpochSecond();
-		int  nanoStart = startTime.getNano();
-		//can we get this elapsed time accurate to milli-seconds? 
-		return differenceInSeconds;
+		return TrackPoint.timeBetweenTrackPoints(first, last);
+	}
+	public long getDistance() {
+		//total distance traveled
+		return 0;
+	}
+	
+	public long getAverageSpeed() {
+		
+		return 0;
 	}
 	
 	

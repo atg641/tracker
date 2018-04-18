@@ -17,12 +17,12 @@ public class TrackPoint {
 		time = Instant.parse(t);
 	}
 
-	public double distanceTo(TrackPoint anotherTrackPoint) {
+	public static double distanceTo(TrackPoint trackPoint, TrackPoint anotherTrackPoint) {
 
 		double lat1 = Math.toRadians(anotherTrackPoint.latitude);
 		double lon1 = Math.toRadians(anotherTrackPoint.longitude);
-		double lat2 = Math.toRadians(latitude);
-		double lon2 = Math.toRadians(longitude);
+		double lat2 = Math.toRadians(trackPoint.latitude);
+		double lon2 = Math.toRadians(trackPoint.longitude);
 		// great circle distance in radians, using law of cosines formula
 		double angle = Math
 				.acos(Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2));
@@ -31,10 +31,19 @@ public class TrackPoint {
 		double nauticalMiles = 60 * Math.toDegrees(angle);
 		double statuteMiles = STATUTE_MILES_PER_NAUTICAL_MILE * nauticalMiles;
 		return statuteMiles;
-
 	}
+	
 	public long timeBetweenTrackPoints(TrackPoint anotherTrackPoint) {
-		return 0;
+		return timeBetweenTrackPoints(this, anotherTrackPoint);
+	}
+	
+	public static long timeBetweenTrackPoints(TrackPoint first, TrackPoint second) {
+		Instant startTime = first.time;
+		Instant endTime = second.time;		
+		long differenceInSeconds = endTime.getEpochSecond()-startTime.getEpochSecond();
+		int  nanoStart = startTime.getNano();
+		//can we get this elapsed time accurate to milli-seconds? 
+		return differenceInSeconds;
 	}
 
 	

@@ -11,7 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.w3c.dom.NodeList; 
 import org.xml.sax.SAXException;
 
 public class TrackCreator {
@@ -60,7 +60,8 @@ public class TrackCreator {
 	}
 
 	public static void main(String [] arg) {
-		GPSTrack myTrack = createTrackFromXML("data/Track102.xmlFFF");
+		GPSTrack myTrack = createTrackFromXML("data/tracks/Track102.xml");
 		System.out.println("Track has " + myTrack.points.size() + " points " );
+		long timeInSeconds = myTrack.getDuration();
 	}
 }

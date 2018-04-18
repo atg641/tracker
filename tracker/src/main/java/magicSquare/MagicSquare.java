@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
 public class MagicSquare {
 	List<String> rowsAsText;
 	List<List<Integer>> matrix;
+
 	
 	public MagicSquare(String filename) {
 		rowsAsText = new ArrayList<String>();
@@ -22,7 +24,8 @@ public class MagicSquare {
 		}
 	}
 	
-	public boolean isValidMagicSquare() {
+
+		
 	int sum = 0;
 		ArrayList <Integer> listOfSums = new ArrayList<Integer>();
 		for(String row : rowsAsText) {
@@ -45,6 +48,7 @@ public class MagicSquare {
 		
 				
 	}
+
 
 
 	private void readFileIntoList(String filename) throws FileNotFoundException {

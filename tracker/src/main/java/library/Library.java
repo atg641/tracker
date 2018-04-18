@@ -1,10 +1,11 @@
 package library;
 import java.util.ArrayList;
+import java.util.List;
 
 class Library {
 
 	private static final int MAX_NUMBER_OF_CHECKED_OUT_BOOKS = 3;
-	ArrayList<Book> books = new ArrayList<Book>();
+	List<Book> books = new ArrayList<Book>();
 	ArrayList<User> users = new ArrayList<User>();
 
 	private String address;

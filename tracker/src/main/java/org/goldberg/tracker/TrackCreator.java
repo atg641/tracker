@@ -60,7 +60,7 @@ public class TrackCreator {
 	}
 
 	public static void main(String [] arg) {
-		GPSTrack myTrack = createTrackFromXML("data/tracks/Track102.xml");
+		GPSTrack myTrack = createTrackFromXML("data/tracks/testTrack.gpx");
 		System.out.println("Track has " + myTrack.points.size() + " points " );
 		long timeInSeconds = myTrack.getDuration();
 	}

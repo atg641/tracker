@@ -61,6 +61,7 @@ public class TrackCreator {
 
 	public static void main(String [] arg) {
 		GPSTrack myTrack = createTrackFromXML("data/tracks/testTrack.gpx");
+		//myTrack.points = myTrack.points.subList(0, 10);
 		System.out.println("Track has " + myTrack.points.size() + " points " );
 		long timeInSeconds = myTrack.getDuration();
 		double avgSpeed = myTrack.getAverageSpeed();

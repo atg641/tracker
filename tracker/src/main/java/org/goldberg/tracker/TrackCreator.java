@@ -63,5 +63,7 @@ public class TrackCreator {
 		GPSTrack myTrack = createTrackFromXML("data/tracks/testTrack.gpx");
 		System.out.println("Track has " + myTrack.points.size() + " points " );
 		long timeInSeconds = myTrack.getDuration();
+		double avgSpeed = myTrack.getAverageSpeed();
+		System.out.println(avgSpeed);
 	}
 }

@@ -84,11 +84,16 @@ public class TrackCreator {
 	}
 
 	public static void main(String[] arg) {
-		GPSTrack myTrack = createTrackFromXML("data/tracks/testTrack.gpx");
+		GPSTrack myTrack = createTrackFromXML("data/tracks/OrindaCycleTrack.gpx");
 		// myTrack.points = myTrack.points.subList(0, 10);
 		System.out.println("Track has " + myTrack.points.size() + " points ");
 		long timeInSeconds = myTrack.getDuration();
 		double avgSpeed = myTrack.getAverageSpeed();
-		System.out.println(avgSpeed);
+		System.out.println("Old average speed: " + avgSpeed);
+		System.out.println("Old non-paused time: " + myTrack.getDuration());
+		avgSpeed = myTrack.getAverageSpeedPairs();
+		System.out.println("New average speed: " + avgSpeed);
+		System.out.println("New non-paused time: " + + myTrack.getTotalTime());
+		System.out.println("distance: " + + myTrack.getTotalDistance());
 	}
 }

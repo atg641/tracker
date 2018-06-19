@@ -15,4 +15,12 @@ public class TrackPair {
 	deltaDistance = TrackPoint.distanceTo(f, s);
 }
 
+	@Override
+	public String toString() {
+		return "TrackPair [deltaTime=" + deltaTime + ", deltaDistance=" + deltaDistance + ", first=" + first
+				+ ", second=" + second + "]";
+	}
+
+	
+
 }

@@ -9,11 +9,17 @@ public class TrackPoint {
 	public double elevation; // units?
 	public Instant time;
 	
-	int cadence;
-	int heartRate;
-	double atemp;
+	public int cadence;
+	public int heartRate;
+	public double atemp;
 	
 	
+	@Override
+	public String toString() {
+		return "TrackPoint [latitude=" + latitude + ", longitude=" + longitude + ", elevation=" + elevation + ", time="
+				+ time + "]";
+	}
+
 	final static double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
 	public TrackPoint(String lat, String lon, String ele, String t) {

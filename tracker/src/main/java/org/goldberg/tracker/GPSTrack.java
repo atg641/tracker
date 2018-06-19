@@ -6,6 +6,7 @@ import java.util.List;
 
 public class GPSTrack {
 	final static double NUMBER_OF_SECONDS_PER_HOUR = 3600.0D;
+	private static final long TIME_BETWEEN_TRACKS_VIEWED_AS_PAUSE = 23;
 	List<TrackPoint> points;
 	List<TrackPair> pairs;
 	public String trackName;
@@ -45,47 +46,23 @@ public class GPSTrack {
 	public long getTotalTime() {
 		long sum = 0;
 		for(TrackPair currentTP : pairs) {
-			if(currentTP.deltaTime < 10) {
+			if(currentTP.deltaTime < TIME_BETWEEN_TRACKS_VIEWED_AS_PAUSE) {
 				sum += currentTP.deltaTime;
+			}
+			else {
+				System.out.println("Ignored time at for track pair:" + currentTP);
 			}
 	}
 		return sum;
 	}
 
-	public double getDistance() {
-		// TrackPoint prev = null;
-		// double sum = 0;
-		// for(TrackPoint currentTP : points) {
-		// if(prev != null ) { // all but first first tp
-		// sum += TrackPoint.distanceTo(prev, currentTP);
-		// }
-		// prev = currentTP;
-		// }
-		// //total distance traveled
-		// return sum;
-
-		double sum = 0;
-		for (int i = 1; i < points.size(); i++) {
-			TrackPoint currentTP = points.get(i);
-			TrackPoint prevTP = points.get(i - 1);
-			sum += TrackPoint.distanceTo(prevTP, currentTP);
-		}
-		return sum;
-
-		// for(int i = 0; i < points.size() - 1; i++) {
-		// TrackPoint currentTP = points.get(i);
-		// TrackPoint nextTP = points.get(i+1);
-		// sum += TrackPoint.distanceTo(nextTP, currentTP);
-		// }
-
-	}
-
+	
 	/**
 	 * @return average speed in mph
 	 */
 	public double getAverageSpeed() {
 		// fill in this method and pay attention to units
-		double distance = getDistance();
+		double distance = getTotalDistance();
 		double time = getDuration() / NUMBER_OF_SECONDS_PER_HOUR;
 		double result = distance / time;
 		return result;

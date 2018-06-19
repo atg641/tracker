@@ -8,6 +8,12 @@ public class TrackPoint {
 	public double longitude;
 	public double elevation; // units?
 	public Instant time;
+	
+	int cadence;
+	int heartRate;
+	double atemp;
+	
+	
 	final static double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
 
 	public TrackPoint(String lat, String lon, String ele, String t) {

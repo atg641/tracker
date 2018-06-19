@@ -11,7 +11,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList; 
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class TrackCreator {
@@ -38,7 +38,7 @@ public class TrackCreator {
 		}
 		doc.getDocumentElement().normalize();
 		NodeList nList = doc.getElementsByTagName("trkpt");
-		GPSTrack gpsTrack  = new GPSTrack();
+		GPSTrack gpsTrack = new GPSTrack();
 		gpsTrack.points = new ArrayList<TrackPoint>();
 		for (int i = 0; i < nList.getLength(); i++) {
 			Node node = nList.item(i);
@@ -50,19 +50,42 @@ public class TrackCreator {
 			String lonS = element.getAttribute("lon");
 			String elevationS = element.getElementsByTagName("ele").item(0).getTextContent();
 			String timeS = element.getElementsByTagName("time").item(0).getTextContent();
-			gpsTrack.points.add(new TrackPoint(latS, lonS, elevationS, timeS));
+			TrackPoint tp = new TrackPoint(latS, lonS, elevationS, timeS);
+			gpsTrack.points.add(tp);
+			Node extensionNode = element.getElementsByTagName("extensions").item(0);
+			if (extensionNode != null) {
+				Element extnEl = (Element) extensionNode;
+				String tempS = getTagValue(extnEl, "ns3:atemp");
+				if (tempS != null)
+					tp.atemp = Double.parseDouble(tempS);
+				String cadS = getTagValue(extnEl, "ns3:cad");
+				if (cadS != null)
+					tp.cadence = Integer.parseInt(cadS);
+				String hrS = getTagValue(extnEl, "ns3:hr");
+				if (cadS != null)
+					tp.heartRate = Integer.parseInt(cadS);
+			}
+
 		}
-		String trackName  = doc.getElementsByTagName("name").item(0).getTextContent();
-		gpsTrack.trackName = trackName;
-		
-		
-		return gpsTrack;
+
+
+	String trackName = doc.getElementsByTagName("name").item(0).getTextContent();gpsTrack.trackName=trackName;
+
+	return gpsTrack;
 	}
 
-	public static void main(String [] arg) {
+	private static String getTagValue(Element extn, String tag) {
+		Node nodeTemp = extn.getElementsByTagName(tag).item(0);
+		if (nodeTemp != null) {
+			return nodeTemp.getTextContent();
+		}
+		return null;
+	}
+
+	public static void main(String[] arg) {
 		GPSTrack myTrack = createTrackFromXML("data/tracks/testTrack.gpx");
-		//myTrack.points = myTrack.points.subList(0, 10);
-		System.out.println("Track has " + myTrack.points.size() + " points " );
+		// myTrack.points = myTrack.points.subList(0, 10);
+		System.out.println("Track has " + myTrack.points.size() + " points ");
 		long timeInSeconds = myTrack.getDuration();
 		double avgSpeed = myTrack.getAverageSpeed();
 		System.out.println(avgSpeed);

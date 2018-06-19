@@ -54,17 +54,22 @@ public class TrackCreator {
 		}
 		String trackName  = doc.getElementsByTagName("name").item(0).getTextContent();
 		gpsTrack.trackName = trackName;
-		
+		gpsTrack.setTrackPairs();
 		
 		return gpsTrack;
 	}
 
 	public static void main(String [] arg) {
-		GPSTrack myTrack = createTrackFromXML("data/tracks/testTrack.gpx");
+		GPSTrack myTrack = createTrackFromXML("data/tracks/OrindaCycleTrack.gpx");
 		//myTrack.points = myTrack.points.subList(0, 10);
+		System.out.println(myTrack.getTotalDistance());
+		System.out.println(myTrack.getTotalTime());
+		
+		System.out.println(myTrack.getAverageSpeedPairs());
 		System.out.println("Track has " + myTrack.points.size() + " points " );
 		long timeInSeconds = myTrack.getDuration();
-		double avgSpeed = myTrack.getAverageSpeed();
 		System.out.println(avgSpeed);
+		
+		
 	}
 }

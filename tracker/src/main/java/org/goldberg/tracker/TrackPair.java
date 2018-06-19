@@ -6,7 +6,11 @@ public class TrackPair {
 	public TrackPoint first;
 	public TrackPoint second;
 	public long deltaTime;
-	public double deltaDistance;
+	public double deltaDistance; //in miles
+	public double deltaElevation;  //in meters
+	public double gradiant; 
+	
+	
 	
 	public TrackPair(TrackPoint f, TrackPoint s) {
 	first = f;

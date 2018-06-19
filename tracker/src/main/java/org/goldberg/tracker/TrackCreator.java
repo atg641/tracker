@@ -68,7 +68,7 @@ public class TrackCreator {
 		System.out.println(myTrack.getAverageSpeedPairs());
 		System.out.println("Track has " + myTrack.points.size() + " points " );
 		long timeInSeconds = myTrack.getDuration();
-		System.out.println(avgSpeed);
+		System.out.println(myTrack.getAverageSpeed());
 		
 		
 	}

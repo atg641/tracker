@@ -1,23 +1,28 @@
 package org.goldberg.tracker;
 
 import java.time.Instant;
+import java.util.ArrayList;
 
 public class TrackPoint {
 
 	public double latitude;
 	public double longitude;
 	public double elevation; // units?
+	public double smoothElevation;
 	public Instant time;
 	
-	public int cadence;
-	public int heartRate;
-	public double atemp;
+	
+	public Integer cadence;
+	public Integer heartRate;
+	public Double atemp;
 	
 	
+
 	@Override
 	public String toString() {
-		return "TrackPoint [latitude=" + latitude + ", longitude=" + longitude + ", elevation=" + elevation + ", time="
-				+ time + "]";
+		return "TrackPoint [latitude=" + latitude + ", longitude=" + longitude + ", elevation=" + elevation
+				+ ", smoothElevation=" + smoothElevation + ", time=" + time + ", cadence=" + cadence + ", heartRate="
+				+ heartRate + ", atemp=" + atemp + "]";
 	}
 
 	final static double STATUTE_MILES_PER_NAUTICAL_MILE = 1.15077945;
@@ -27,6 +32,7 @@ public class TrackPoint {
 		longitude = Double.parseDouble(lon);
 		elevation = Double.parseDouble(ele);
 		time = Instant.parse(t);
+		
 	}
 
 	public static double distanceTo(TrackPoint trackPoint, TrackPoint anotherTrackPoint) {
@@ -58,7 +64,8 @@ public class TrackPoint {
 		return differenceInSeconds;
 	}
 
+	}
 	
 
 
-}
+

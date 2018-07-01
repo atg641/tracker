@@ -34,6 +34,42 @@ public class GPSTrack {
 		}
 	}
 
+	public void setSmoothElevation() {
+		
+		for (int i = 1; i < points.size() - 1; i++) {
+			double avgElevation = 0;
+			TrackPoint currentTP = points.get(i);
+			TrackPoint nextTP = points.get(i + 1);
+			TrackPoint prevTP = points.get(i - 1);
+			avgElevation = (currentTP.elevation + nextTP.elevation + prevTP.elevation) / 3;	
+			currentTP.smoothElevation = avgElevation;
+		}
+		points.get(0).smoothElevation = points.get(0).elevation;
+		points.get(points.size()-1).smoothElevation = points.get(points.size()-1).elevation;
+		
+	}
+	
+	public void setSmoothElevation(int pointsBefore, int pointsAfter) {
+		for (int i = 4; i < points.size() - 4; i++) {
+			TrackPoint currentTP = points.get(i);
+			double pointsBeforeAverage = 0;
+			double pointsBeforeSum = 0;
+			double pointsAfterAverage = 0;
+			double pointsAfterSum = 0;
+			for(int k = i; k > i - pointsBefore; k--) {
+				TrackPoint TPBefore = points.get(k);
+				pointsBeforeSum = pointsBeforeSum + TPBefore.elevation;
+			}
+			pointsBeforeAverage = pointsBeforeSum / pointsBefore;
+			for(int a = i; a < i + pointsAfter; a++) {
+				TrackPoint TPAfter = points.get(a);
+				pointsAfterSum = pointsAfterSum + TPAfter.elevation;
+			}
+			pointsAfterAverage = pointsAfterSum / pointsAfter;
+			currentTP.smoothElevation = (pointsBeforeAverage + pointsAfterAverage)/2;
+		}	
+	}
+	
 	public double getTotalDistance() {
 	
 		double sum = 0;
@@ -55,7 +91,19 @@ public class GPSTrack {
 	}
 		return sum;
 	}
-
+	
+	public void printElevation() {
+		for(TrackPair currentTP: pairs) {
+			System.out.println("ele: " + currentTP.deltaElevation);
+			System.out.println("graadiant: " + currentTP.gradiant);
+			System.out.println("time: " + currentTP.deltaTime);
+		}
+		for(TrackPoint currentTP: points) {
+			System.out.println("ele: " + currentTP.elevation);
+			System.out.println("Smooth Elevation: " + currentTP.smoothElevation);
+			System.out.println("time: " + currentTP.time);
+		}
+	}
 	
 	/**
 	 * @return average speed in mph

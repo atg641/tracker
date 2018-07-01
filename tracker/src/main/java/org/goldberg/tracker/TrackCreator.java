@@ -62,8 +62,8 @@ public class TrackCreator {
 				if (cadS != null)
 					tp.cadence = Integer.parseInt(cadS);
 				String hrS = getTagValue(extnEl, "ns3:hr");
-				if (cadS != null)
-					tp.heartRate = Integer.parseInt(cadS);
+				if (hrS != null)
+					tp.heartRate = Integer.parseInt(hrS);
 			}
 
 		}
@@ -72,6 +72,7 @@ public class TrackCreator {
 	String trackName = doc.getElementsByTagName("name").item(0).getTextContent();gpsTrack.trackName=trackName;
 		gpsTrack.trackName = trackName;
 		gpsTrack.setTrackPairs();
+		gpsTrack.setSmoothElevation();
 	return gpsTrack;
 	}
 
@@ -95,5 +96,7 @@ public class TrackCreator {
 		System.out.println("New average speed: " + avgSpeed);
 		System.out.println("New non-paused time: " + + myTrack.getTotalTime());
 		System.out.println("distance: " + + myTrack.getTotalDistance());
+		myTrack.printElevation();
+		myTrack.setSmoothElevation(5, 5);
 	}
 }

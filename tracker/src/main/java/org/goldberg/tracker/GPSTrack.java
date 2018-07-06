@@ -4,6 +4,8 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 public class GPSTrack {
 	final static double NUMBER_OF_SECONDS_PER_HOUR = 3600.0D;
 	private static final long TIME_BETWEEN_TRACKS_VIEWED_AS_PAUSE = 23;
@@ -11,6 +13,9 @@ public class GPSTrack {
 	List<TrackPair> pairs;
 	public String trackName;
 	public String trackDecription;
+	public double minSmoothedElevation  = Double.MAX_VALUE;
+	public double maxSmoothedElevation  = Double.MIN_VALUE;
+	public double trackTotalDistance;
 
 	public long getDuration() {
 		TrackPoint first = points.get(0);
@@ -25,13 +30,18 @@ public class GPSTrack {
 	 */
 	public void setTrackPairs() {
 		pairs = new ArrayList<TrackPair>(points.size() - 1);
-
+		double distanceSoFar = 0;
+		points.get(0).distanceFromTrackStart = 0.0;
 		for (int i = 1; i < points.size(); i++) {
 			TrackPoint currentTP = points.get(i);
 			TrackPoint prevTP = points.get(i - 1);
 			TrackPair pair = new TrackPair(prevTP, currentTP);
+			distanceSoFar += pair.deltaDistance;
+			currentTP.distanceFromTrackStart = distanceSoFar;
 			pairs.add(pair);
 		}
+		
+		trackTotalDistance = distanceSoFar;
 	}
 
 	public void setSmoothElevation() {
@@ -43,14 +53,20 @@ public class GPSTrack {
 			TrackPoint prevTP = points.get(i - 1);
 			avgElevation = (currentTP.elevation + nextTP.elevation + prevTP.elevation) / 3;	
 			currentTP.smoothElevation = avgElevation;
+			setMaxMinSmoothedElevation(currentTP);
 		}
 		points.get(0).smoothElevation = points.get(0).elevation;
+		setMaxMinSmoothedElevation(points.get(0));
 		points.get(points.size()-1).smoothElevation = points.get(points.size()-1).elevation;
-		
+		setMaxMinSmoothedElevation(points.get(points.size()-1));
+
 	}
 	
 	public void setSmoothElevation(int pointsBefore, int pointsAfter) {
-		for (int i = 4; i < points.size() - 4; i++) {
+		
+
+		
+		for (int i = pointsBefore; i < points.size() - pointsAfter; i++) {
 			TrackPoint currentTP = points.get(i);
 			double pointsBeforeAverage = 0;
 			double pointsBeforeSum = 0;
@@ -67,16 +83,21 @@ public class GPSTrack {
 			}
 			pointsAfterAverage = pointsAfterSum / pointsAfter;
 			currentTP.smoothElevation = (pointsBeforeAverage + pointsAfterAverage)/2;
+			setMaxMinSmoothedElevation(currentTP);
+
 		}	
+		//set smooth elevation for points not set in the loop
+	}
+	
+	private void  setMaxMinSmoothedElevation(TrackPoint tp) {
+		if(tp.smoothElevation  > maxSmoothedElevation)
+			maxSmoothedElevation = tp.smoothElevation;
+		if(tp.smoothElevation  < minSmoothedElevation)
+			minSmoothedElevation = tp.smoothElevation;
 	}
 	
 	public double getTotalDistance() {
-	
-		double sum = 0;
-		for (TrackPair currentTP : pairs) {
-			sum += currentTP.deltaDistance;
-		}
-		return sum;
+		return trackTotalDistance;
 	}
 	
 	public long getTotalTime() {
@@ -95,7 +116,7 @@ public class GPSTrack {
 	public void printElevation() {
 		for(TrackPair currentTP: pairs) {
 			System.out.println("ele: " + currentTP.deltaElevation);
-			System.out.println("graadiant: " + currentTP.gradiant);
+			System.out.println("gradiant: " + currentTP.gradiant);
 			System.out.println("time: " + currentTP.deltaTime);
 		}
 		for(TrackPoint currentTP: points) {
@@ -123,5 +144,7 @@ public class GPSTrack {
 		double result = distance / time;
 		return result;
 	}
+
+	
 
 }

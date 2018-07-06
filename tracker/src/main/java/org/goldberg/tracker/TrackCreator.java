@@ -98,5 +98,9 @@ public class TrackCreator {
 		System.out.println("distance: " + + myTrack.getTotalDistance());
 		myTrack.printElevation();
 		myTrack.setSmoothElevation(5, 5);
+		System.out.println("min ele: " + + myTrack.minSmoothedElevation);
+		System.out.println("max ele: " + + myTrack.maxSmoothedElevation);
+		
+		new ElevationWindow(myTrack);
 	}
 }

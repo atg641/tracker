@@ -9,6 +9,7 @@ public class TrackPoint {
 	public double longitude;
 	public double elevation; // units?
 	public double smoothElevation;
+	public double distanceFromTrackStart;
 	public Instant time;
 	
 	
@@ -33,6 +34,11 @@ public class TrackPoint {
 		elevation = Double.parseDouble(ele);
 		time = Instant.parse(t);
 		
+	}
+	
+	//just for testing
+	public TrackPoint(double elevat) {
+		elevation = elevat;
 	}
 
 	public static double distanceTo(TrackPoint trackPoint, TrackPoint anotherTrackPoint) {

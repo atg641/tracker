@@ -72,7 +72,7 @@ public class TrackCreator {
 	String trackName = doc.getElementsByTagName("name").item(0).getTextContent();gpsTrack.trackName=trackName;
 		gpsTrack.trackName = trackName;
 		gpsTrack.setTrackPairs();
-		gpsTrack.setSmoothElevation();
+
 	return gpsTrack;
 	}
 
@@ -97,7 +97,7 @@ public class TrackCreator {
 		System.out.println("New non-paused time: " + + myTrack.getTotalTime());
 		System.out.println("distance: " + + myTrack.getTotalDistance());
 		myTrack.printElevation();
-		myTrack.setSmoothElevation(5, 5);
+		myTrack.setSmoothElevation(10, 10);
 		System.out.println("min ele: " + + myTrack.minSmoothedElevation);
 		System.out.println("max ele: " + + myTrack.maxSmoothedElevation);
 		

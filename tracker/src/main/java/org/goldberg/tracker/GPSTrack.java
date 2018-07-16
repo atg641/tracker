@@ -12,6 +12,8 @@ public class GPSTrack {
 	List<TrackPoint> points;
 	List<TrackPair> pairs;
 	public String trackName;
+
+
 	public String trackDecription;
 	public double minSmoothedElevation  = Double.MAX_VALUE;
 	public double maxSmoothedElevation  = Double.MIN_VALUE;
@@ -63,9 +65,6 @@ public class GPSTrack {
 	}
 	
 	public void setSmoothElevation(int pointsBefore, int pointsAfter) {
-		
-
-		
 		for (int i = pointsBefore; i < points.size() - pointsAfter; i++) {
 			TrackPoint currentTP = points.get(i);
 			double pointsBeforeAverage = 0;
@@ -86,7 +85,14 @@ public class GPSTrack {
 			setMaxMinSmoothedElevation(currentTP);
 
 		}	
-		//set smooth elevation for points not set in the loop
+		for (int i = 0 ; i < pointsBefore; i++) {
+			TrackPoint currentTP = points.get(i);
+			currentTP.smoothElevation = currentTP.elevation;
+		}
+		for (int i = points.size() - 1 ; i > points.size() - pointsAfter; i--) {
+			TrackPoint currentTP = points.get(i);
+			currentTP.smoothElevation = currentTP.elevation;
+		}
 	}
 	
 	private void  setMaxMinSmoothedElevation(TrackPoint tp) {

@@ -71,7 +71,6 @@ public class TrackCreator {
 
 	String trackName = doc.getElementsByTagName("name").item(0).getTextContent();gpsTrack.trackName=trackName;
 		gpsTrack.trackName = trackName;
-		gpsTrack.setTrackPairs();
 
 	return gpsTrack;
 	}
@@ -86,7 +85,7 @@ public class TrackCreator {
 
 	public static void main(String[] arg) {
 		GPSTrack myTrack = createTrackFromXML("data/tracks/OrindaCycleTrack.gpx");
-		// myTrack.points = myTrack.points.subList(0, 10);
+		myTrack.computeDerivedData();
 		System.out.println("Track has " + myTrack.points.size() + " points ");
 		long timeInSeconds = myTrack.getDuration();
 		double avgSpeed = myTrack.getAverageSpeed();
@@ -97,9 +96,11 @@ public class TrackCreator {
 		System.out.println("New non-paused time: " + + myTrack.getTotalTime());
 		System.out.println("distance: " + + myTrack.getTotalDistance());
 		myTrack.printElevation();
-		myTrack.setSmoothElevation(10, 10);
 		System.out.println("min ele: " + + myTrack.minSmoothedElevation);
 		System.out.println("max ele: " + + myTrack.maxSmoothedElevation);
+		System.out.println("total positive elevation:" +  myTrack.totalAscent + "Total Negative Elevation:" + myTrack.totalDescent);
+		System.out.println("total smooth positive elevation:" +  myTrack.totalSmoothAscent + "Total smooth Negative Elevation:" + myTrack.totalSmoothDescent
+				);
 		
 		new ElevationWindow(myTrack);
 	}

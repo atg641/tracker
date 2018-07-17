@@ -11,6 +11,10 @@ public class GPSTrack {
 	private static final long TIME_BETWEEN_TRACKS_VIEWED_AS_PAUSE = 23;
 	List<TrackPoint> points;
 	List<TrackPair> pairs;
+	double totalAscent = 0;
+	double totalDescent = 0;
+	double totalSmoothAscent = 0;
+	double totalSmoothDescent = 0;
 	public String trackName;
 
 
@@ -30,7 +34,12 @@ public class GPSTrack {
 	 * 
 	 * @return
 	 */
-	public void setTrackPairs() {
+	public void computeDerivedData() {
+		setSmoothElevation(8,8);
+		setTrackPairs();
+	}
+	
+	private void setTrackPairs() {
 		pairs = new ArrayList<TrackPair>(points.size() - 1);
 		double distanceSoFar = 0;
 		points.get(0).distanceFromTrackStart = 0.0;
@@ -39,6 +48,18 @@ public class GPSTrack {
 			TrackPoint prevTP = points.get(i - 1);
 			TrackPair pair = new TrackPair(prevTP, currentTP);
 			distanceSoFar += pair.deltaDistance;
+			if (pair.deltaElevation > 0) {
+				totalAscent += pair.deltaElevation;
+						}
+			if (pair.deltaElevation < 0) {
+				totalDescent += pair.deltaElevation;
+						}
+			if (pair.deltaSmoothElevation > 0) {
+				totalSmoothAscent += pair.deltaSmoothElevation;
+						}
+			if (pair.deltaSmoothElevation < 0) {
+				totalSmoothDescent += pair.deltaSmoothElevation;
+						}
 			currentTP.distanceFromTrackStart = distanceSoFar;
 			pairs.add(pair);
 		}
@@ -46,23 +67,23 @@ public class GPSTrack {
 		trackTotalDistance = distanceSoFar;
 	}
 
-	public void setSmoothElevation() {
-		
-		for (int i = 1; i < points.size() - 1; i++) {
-			double avgElevation = 0;
-			TrackPoint currentTP = points.get(i);
-			TrackPoint nextTP = points.get(i + 1);
-			TrackPoint prevTP = points.get(i - 1);
-			avgElevation = (currentTP.elevation + nextTP.elevation + prevTP.elevation) / 3;	
-			currentTP.smoothElevation = avgElevation;
-			setMaxMinSmoothedElevation(currentTP);
-		}
-		points.get(0).smoothElevation = points.get(0).elevation;
-		setMaxMinSmoothedElevation(points.get(0));
-		points.get(points.size()-1).smoothElevation = points.get(points.size()-1).elevation;
-		setMaxMinSmoothedElevation(points.get(points.size()-1));
-
-	}
+//	private void setSmoothElevation() {
+//		
+//		for (int i = 1; i < points.size() - 1; i++) {
+//			double avgElevation = 0;
+//			TrackPoint currentTP = points.get(i);
+//			TrackPoint nextTP = points.get(i + 1);
+//			TrackPoint prevTP = points.get(i - 1);
+//			avgElevation = (currentTP.elevation + nextTP.elevation + prevTP.elevation) / 3;	
+//			currentTP.smoothElevation = avgElevation;
+//			setMaxMinSmoothedElevation(currentTP);
+//		}
+//		points.get(0).smoothElevation = points.get(0).elevation;
+//		setMaxMinSmoothedElevation(points.get(0));
+//		points.get(points.size()-1).smoothElevation = points.get(points.size()-1).elevation;
+//		setMaxMinSmoothedElevation(points.get(points.size()-1));
+//
+//	}
 	
 	public void setSmoothElevation(int pointsBefore, int pointsAfter) {
 		for (int i = pointsBefore; i < points.size() - pointsAfter; i++) {

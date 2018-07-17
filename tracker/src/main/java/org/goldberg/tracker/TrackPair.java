@@ -8,6 +8,7 @@ public class TrackPair {
 	public long deltaTime;
 	public double deltaDistance; //in miles
 	public double deltaElevation;  //in meters
+	public double deltaSmoothElevation;  //in meters
 	public double gradiant; 
 	public double METERS_IN_MILE = 1609.34;
 	
@@ -19,6 +20,7 @@ public class TrackPair {
 	deltaTime = TrackPoint.timeBetweenTrackPoints(f , s);
 	deltaDistance = TrackPoint.distanceTo(f, s);
 	deltaElevation = s.elevation - f.elevation;
+	deltaSmoothElevation = s.smoothElevation - f.smoothElevation;
 	double deltaDistanceInMeters = deltaDistance * METERS_IN_MILE;
 	gradiant = (deltaElevation / deltaDistanceInMeters) * 100.0;
 	
